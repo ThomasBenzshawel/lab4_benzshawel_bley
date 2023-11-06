@@ -33,7 +33,7 @@ def _heap_increase_key(A, i, key):
             A[_parent(i)] = temp
             i = _parent(i)
 
-def _max_heapify(A, i):
+def _max_heapify(A, i, heap_size):
     """
     Element is in the list but not yet part of the heap. This
     adds i into the heap.
@@ -41,18 +41,18 @@ def _max_heapify(A, i):
     l = _left(i)
     r = _right(i)
 
-    if l < len(A) and A[l] > A[i]:
+    if l < heap_size and A[l] > A[i]:
         largest = l
     else:
         largest = i
 
-    if r < len(A) and A[r] > A[largest]:
+    if r < heap_size and A[r] > A[largest]:
         largest = r
     if largest is not i:
         temp = A[i]
         A[i] = A[largest]
         A[largest] = temp
-        _max_heapify(A, largest)
+        _max_heapify(A, largest, heap_size)
 
 def max_heap_insert(A, key):
     """
@@ -77,7 +77,7 @@ def heap_extract_max(A):
         A[0] = A[len(A) - 1]
         # A.heap_size = A.heap_size - 1
         del A[0]
-        _max_heapify(A, 0)
+        _max_heapify(A, 0, len(A))
     return max
 
 def build_max_heap(A):
@@ -89,7 +89,7 @@ def build_max_heap(A):
     # A.heap_size = 1
 
     for i in range(len(A)//2 - 1, -1, -1):
-        _max_heapify(A, i)
+        _max_heapify(A, i, len(A))
 
 def heapsort(A):
     """
@@ -99,11 +99,7 @@ def heapsort(A):
     """
 
     build_max_heap(A)
-
     for i in range(len(A) - 1, 0, -1):
-        temp = A[0]
-        A[0] = A[i]
-        A[i] = temp
-
-        # A.heap_size = A.heap_size - 1
-        _max_heapify(A, i)
+        A[0], A[i] = A[i], A[0]
+        print(A)
+        _max_heapify(A, 0, i)

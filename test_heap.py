@@ -102,8 +102,7 @@ class TestHeap(unittest.TestCase):
         expected = lst[:]
         expected.sort()
 
-        print(expected)
-        print(lst)
+        heapsort(lst)
 
         self.assertListEqual(expected, lst)
 
