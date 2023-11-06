@@ -53,6 +53,7 @@ class TestHeap(unittest.TestCase):
 
         max_heap_insert(heap, 7)
         self.assertEqual(len(heap), 4)
+
         self.assertTrue(satisfies_heap_property(heap))
 
         expected = [7, 6, 4, 5]
@@ -101,7 +102,8 @@ class TestHeap(unittest.TestCase):
         expected = lst[:]
         expected.sort()
 
-        heapsort(lst)
+        print(expected)
+        print(lst)
 
         self.assertListEqual(expected, lst)
 
